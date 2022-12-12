@@ -1,0 +1,46 @@
+{% extends 'layouts/main.html' %}
+
+{% block content %}
+    <style type="text/css">
+        .posts {
+            display: flex;
+            justify-content: space-between;
+            margin-left: 10%;
+            width: 80%;
+            flex-wrap: wrap;
+        }
+        .search {
+            width: 80%;
+            margin-left: 10%;
+        }
+    </style>
+    <div>
+        <form action="/posts/" method="get" class="search">
+            {% if hashtag_id %}
+                <input type="hidden" name="hashtag_id" value="{{ hashtag_id }}">
+            {% endif %}
+            <span style="margin-right: 16px">Search</span>
+            <input type="text" name="search" value="">
+        </form>
+    </div>
+    <div class="posts">
+        {% for post in posts %}
+            <div class="card" style="width: 20%; margin: 20px;">
+                <div class="card_body">
+                    <h5>{{ post.title }}</h5>
+                    {% for hashtag in post.hashtags %}
+                        <div>{{ hashtag.title }}</div>
+                    {% endfor %}
+                    <a href="/posts/{{ post.id }}/" class="btn btn-primary">More</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div>
+        {% for page in max_page %}
+            <a href="/posts/?page={{ page }}">
+                <button>{{ page }}</button>
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}

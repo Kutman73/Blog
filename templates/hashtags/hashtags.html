@@ -1,0 +1,33 @@
+{% extends 'layouts/main.html' %}
+
+
+{% block content %}
+    <style type="text/css">
+        .hashtag {
+            display: flex;
+            justify-content: space-between;
+            width: 20%;
+        }
+        .hashtags {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            margin-left: 10%;
+        }
+        .hashtag > img {
+            width: 35px;
+        }
+    </style>
+    <div class="hashtags">
+        {% for hashtag in hashtags %}
+            <div class="hashtag">
+                <img src="/media/{{ hashtag.icon }}" alt="">
+                <h3>
+                    <a href="/posts/?hashtag_id={{ hashtag.id }}">
+                        {{ hashtag.title }}
+                    </a>
+                </h3>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
